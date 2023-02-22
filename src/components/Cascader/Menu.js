@@ -12,7 +12,6 @@ export function Menu({list, dep, changeActivePath, activePath, checkedList}) {
         if(Array.isArray(moreList)&&moreList.length>0) {
             return (
                 <Menu list={moreList} dep={dep+1} changeActivePath={changeActivePath} activePath={activePath}>
-
                 </Menu>
             )
         }
