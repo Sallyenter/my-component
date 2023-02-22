@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { menuList } from "./mock";
+import { Menu } from "./Menu";
 
 function App() {
+  const [activePath, setActivePath] = useState([]);
+  const changeActivePath = (dep, id, list) => {
+    const copyactivePath = JSON.parse(JSON.stringify(activePath));
+    copyactivePath[dep] = id;
+    for (let i = 0; i < copyactivePath.length; i++) {
+      if (i > dep) {
+        copyactivePath[i] = null;
+      }
+    }
+    setActivePath(copyactivePath);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="cascader item">
+        级联选择:
+        <div>
+          <Menu
+            list={menuList}
+            dep={0}
+            changeActivePath={changeActivePath}
+            activePath={activePath}
+          ></Menu>
+        </div>
+      </div>
     </div>
   );
 }
